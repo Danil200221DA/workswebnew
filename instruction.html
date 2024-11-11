@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Инструкция - AI AMMO SOFT</title>
+  <style>
+    /* Основные стили */
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to right, #add8e6, #003366); /* Светло-синий к темно-синему */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      animation: backgroundAnimation 15s ease infinite alternate; /* Более плавная анимация фона */
+    }
+
+    /* Анимация для фона */
+    @keyframes backgroundAnimation {
+      0% {
+        background: linear-gradient(to right, #add8e6, #003366);
+      }
+      100% {
+        background: linear-gradient(to right, #003366, #add8e6);
+      }
+    }
+
+    .container {
+      text-align: center;
+      padding: 40px;
+      background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный фон */
+      border-radius: 12px;
+      width: 90%;
+      max-width: 700px;
+      margin: 10px;
+      color: #fff;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-out; /* Плавное появление заголовка */
+    }
+
+    .instruction-text {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-top: 20px;
+      color: #fff;
+    }
+
+    .highlight {
+      color: #28a745; /* Зеленый цвет для промокода */
+      font-weight: bold;
+      animation: bounce 2s infinite ease-in-out; /* Анимация для промокода */
+    }
+
+    /* Анимация для текста промокода */
+    @keyframes bounce {
+      0%, 100% {
+        transform: scale(1); /* Исходный размер */
+      }
+      50% {
+        transform: scale(1.2); /* Увеличение текста */
+      }
+    }
+
+    /* Плавное появление заголовка */
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .button {
+      background-color: #3D4B61;
+      padding: 12px 25px;
+      border-radius: 8px;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+      animation: bounceButton 2s infinite ease-in-out;
+      margin: 20px 0;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
+      background-color: #28a745;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Анимация для кнопки */
+    @keyframes bounceButton {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* Адаптивные стили для мобильных устройств */
+    @media (max-width: 768px) {
+      .instruction-text {
+        font-size: 16px; /* Уменьшение шрифта на планшетах */
+      }
+      .button {
+        font-size: 14px; /* Уменьшение шрифта кнопки */
+        padding: 10px 20px; /* Уменьшение отступов */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .instruction-text {
+        font-size: 14px; /* Уменьшение шрифта на мобильных устройствах */
+      }
+      .button {
+        font-size: 12px; /* Уменьшение шрифта кнопки */
+        padding: 8px 16px; /* Уменьшение отступов на мобильных устройствах */
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Инструкция</h1>
+  <p class="instruction-text">
+    Чтобы сигналы начали работать, необходимо зарегистрировать новый аккаунт по ссылке в боте, используя промокод <span class="highlight">“500DAR”</span>, подробное видео находится в закрепе. Таким образом Вы подвяжете свой профиль к боту и будете получать сигналы с проходимостью более <span class="highlight">98%</span>.
+  </p>
+  <button class="button" onclick="goToIndex()">Перейти на главную</button>
+</div>
+
+<script>
+  // Функция для перехода на страницу index.html
+  function goToIndex() {
+    window.location.href = 'index.html'; // Перенаправление на страницу index.html
+  }
+</script>
+
+</body>
+</html>

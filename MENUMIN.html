@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню с прокруткой</title>
+    <style>
+        /* Основные стили */
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(to right, #1c1c1c, #3b7aff);
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+        }
+        #promo {
+            font-size: 24px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+            margin-bottom: 20px;
+        }
+        #container {
+            text-align: center;
+            width: 300px;
+        }
+        #trap-count {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        #number-selector {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            width: 100%;
+            height: 100px;
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        .number {
+            font-size: 50px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0.3;
+            margin: 0 5px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+        .number.active {
+            font-size: 70px;
+            opacity: 1;
+            color: green;
+            transform: scale(1.2);
+        }
+        #get-signal, #get {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+            transition: background 0.3s, transform 0.3s;
+            animation: bounce 3s infinite;
+        }
+        #get-signal:hover, #get:hover {
+            background: rgba(0, 255, 0, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* Анимация прыжка */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Анимация увеличения текста промокода */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+
+<div id="promo">Промокод: DAR500</div>
+
+<div id="container">
+    <div id="trap-count">Кол-во ловушек</div>
+    <div id="number-selector">
+        <span class="number">1</span>
+        <span class="number">3</span>
+        <span class="number">4</span>
+        <span class="number">7</span>
+    </div>
+   <button id="get-signal">Получить сигнал</button>
+
+<script>
+    // Нажатие на кнопку "Получить сигнал"
+    document.getElementById('get-signal').addEventListener('click', () => {
+        window.location.href = 'mines7.html'; // Переход на mines7.html
+    });
+</script>
+</div>
+
+<button id="get">Назад в меню</button>
+<script>
+    // Нажатие на кнопку "Получить сигнал"
+    document.getElementById('get').addEventListener('click', () => {
+        window.location.href = 'index.html'; // Переход на mines7.html
+    });
+</script>
+<script>
+    const numbers = document.querySelectorAll('.number');
+    let activeIndex = 0; // Стартовый индекс активного числа
+
+  
+
+    // Функция для обновления активного числа
+    function updateActiveNumber() {
+        numbers.forEach((num, index) => {
+            num.classList.remove('active');
+            num.style.opacity = '0.3';
+        });
+        
+        numbers[activeIndex].classList.add('active');
+        numbers[activeIndex].style.opacity = '1';
+    }
+
+    // Прокрутка чисел по клику или касанию
+    function handleSelectorClick() {
+
+activeIndex = (activeIndex + 1) % numbers.length;
+        updateActiveNumber();
+    }
+
+    document.getElementById('number-selector').addEventListener('click', handleSelectorClick);
+    document.getElementById('number-selector').addEventListener('touchstart', handleSelectorClick);
+
+    // Нажатие на кнопку "Получить сигнал"
+    function goToSelectedPage() {
+        const selectedPage = links[activeIndex];
+        window.location.href = selectedPage;
+    }
+
+    document.getElementById('get-signal').addEventListener('click', goToSelectedPage);
+    document.getElementById('get-signal').addEventListener('touchstart', goToSelectedPage);
+
+    // Инициализация активного числа при загрузке
+    updateActiveNumber();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Multiplier Generator</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f, #3b9cd5, #8a2be2);
+            background-size: 200% 200%;
+            animation: gradientShift 6s infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        #generator-container {
+            text-align: center;
+            color: #00bfff;
+        }
+
+        #multiplier {
+            font-size: 4em;
+            font-family: 'Roboto Mono', monospace;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            animation: bounce 0.5s ease;
+            transform-origin: bottom;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .button {
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #1f1f1f;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            touch-action: manipulation;
+        }
+
+        .button:hover,
+        .button:active {
+            background-color: #32cd32; /* Green on hover */
+            transform: scale(1.05); /* Slightly enlarges on hover */
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5); /* Deeper shadow on hover */
+        }
+
+        .button:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="generator-container">
+        <div id="multiplier">x00.00</div>
+        <button class="button" onclick="generateMultiplier()">Получить сигнал</button>
+        <button class="button" onclick="goToMenu()">Назад в меню</button>
+    </div>
+
+    <script>
+        function generateMultiplier() {
+            // Generate a random number between 0 and 1, then square it to create a bias
+            let random = Math.pow(Math.random(), 2); // Squaring creates bias toward lower values
+            
+            // Scale the biased random number to the desired range (0.1 to 100)
+            let multiplier = (random * (100 - 0.1) + 0.1).toFixed(2);
+
+            // Display the result and add the bounce animation
+            const multiplierElement = document.getElementById("multiplier");
+            multiplierElement.innerText = "x" + multiplier;
+            multiplierElement.style.animation = "none"; // Reset animation
+            setTimeout(() => {
+                multiplierElement.style.animation = "bounce 0.7s ease"; // Trigger bounce animation
+            }, 10);
+        }
+
+        function goToMenu() {
+            // Navigate to menu.html
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI AMMO SOFT - Signal Grid</title>
+  <style>
+    /* Основные стили */
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to right, #add8e6, #003366); /* Светло-синий к темно-синему */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    .container {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 500px;
+      margin: 10px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr); /* 5 колонок */
+      gap: 10px;
+      margin: 20px 0;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 12px;
+      width: 100%;
+      box-sizing: border-box; /* Убедимся, что padding не увеличивает размеры */
+    }
+    .cell {
+      position: relative;
+      padding-top: 100%; /* Соотношение 1:1 для равных клеток */
+      background-color: #4CAFEF;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    .star {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transform: scale(0);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      background-image: url('https://cdn.icon-icons.com/icons2/153/PNG/256/star_favourite_21830.png');
+      background-size: cover;
+      background-position: center;
+    }
+    .button {
+      background-color: #3D4B61;
+      padding: 10px 20px;
+      border-radius: 8px;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+      animation: bounceButton 3s infinite;
+      margin: 10px 0;
+    }
+    .button:hover {
+      transform: scale(1.1);
+      background-color: #28a745;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+    }
+    .star.active {
+      opacity: 1;
+      transform: scale(1.2);
+      animation: bounce 0.3s forwards;
+    }
+    /* Анимация для звезд */
+    @keyframes bounce {
+      0% { transform: scale(0); }
+      70% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    /* Анимация для кнопки */
+    @keyframes bounceButton {
+      0%, 90% { transform: scale(1); }
+      95% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Адаптивные стили для мобильных устройств */
+    @media (max-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(5, 1fr); /* 5 колонок для больших планшетов */
+      }
+    }
+
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: repeat(5, 1fr); /* 5 колонок для планшетов */
+      }
+      .button {
+        font-size: 14px; /* Уменьшение шрифта кнопки на планшетах */
+        padding: 8px 16px; /* Уменьшение отступов */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .grid {
+        grid-template-columns: repeat(5, 1fr); /* 5 колонок для мобильных телефонов */
+      }
+      .button {
+        font-size: 14px; /* Уменьшение размера шрифта */
+        padding: 8px 14px; /* Уменьшение отступов на мобильных устройствах */
+      }
+      .container {
+        width: 95%; /* Почти на всю ширину экрана */
+        padding: 15px; /* Уменьшение отступов */
+      }
+    }
+
+    @media (max-width: 320px) {
+      .grid {
+        grid-template-columns: repeat(5, 1fr); /* 5 колонок для маленьких экранов */
+      }
+      .button {
+        font-size: 12px; /* Уменьшение шрифта на очень маленьких экранах */
+        padding: 6px 12px; /* Меньше отступов */
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="grid" id="grid">
+    <!-- 25 клеток будут добавлены через JavaScript -->
+  </div>
+  <button class="button" onclick="revealStars()">Получить сигнал</button>
+  <button class="button" id="backButton">Назад в меню</button>
+</div>
+
+<script>
+  // Нажатие на кнопку "Назад в меню"
+  document.getElementById('backButton').addEventListener('click', () => {
+    window.location.href = 'MENUMIN.html'; // Переход на MENUMIN.html
+  });
+
+  const grid = document.getElementById('grid');
+
+  // Создаем 25 ячеек
+  for (let i = 0; i < 25; i++) {
+    const cell = document.createElement('div');
+    cell.classList.add('cell');
+    grid.appendChild(cell);
+  }
+
+  function revealStars() {
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach(cell => cell.innerHTML = ''); // Очистить ячейки перед новым отображением звезд
+
+    // Генерация 5 случайных позиций для звезд
+    const starPositions = [];
+    while (starPositions.length < 5) {
+      let randomIndex = Math.floor(Math.random() * 25); // Выбираем случайную клетку
+      if (!starPositions.includes(randomIndex)) {
+        starPositions.push(randomIndex); // Добавляем уникальную позицию
+      }
+    }
+
+    // Добавление звездочек с задержкой поочередного появления
+    starPositions.forEach((index, i) => {
+      setTimeout(() => {
+        const star = document.createElement('div');
+        star.classList.add('star', 'active');
+        cells[index].appendChild(star);
+      }, i * 500); // задержка в 500мс между звездами
+    });
+  }
+</script>
+
+</body>
+</html>
